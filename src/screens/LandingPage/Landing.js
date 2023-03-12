@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { SafeAreaView, StyleSheet, Text, View , ScrollView} from 'react-native';
-//import PieChart from 'react-native-expo-pie-chart';
+
 import {
     PieChart,
     Dimensions
