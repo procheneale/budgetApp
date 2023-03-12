@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import { SafeAreaView, StyleSheet, Text, View , ScrollView} from 'react-native';
+import { useRhinoState, useRhinoValue } from "react-rhino"
 
 import {
     PieChart,
@@ -8,6 +9,7 @@ import {
 
 
 export default function Landing() {
+    const income = useRhinoValue("income")
     return(
         <View>
             <PieChart
@@ -65,6 +67,7 @@ export default function Landing() {
         <Text style={styles.centered}>Wants:</Text>
         <Text style={styles.centered}>Needs:</Text>
         <Text style={styles.centered}>Savings:</Text>
+        <Text style={styles.centered}>Income: {income}</Text>
       </View>
     );
 }

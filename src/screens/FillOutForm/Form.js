@@ -2,25 +2,14 @@ import React, { useState } from 'react';
 import { StyleSheet, Button, Text, TextInput, View , Alert} from 'react-native';
 
 import CurrencyInput from 'react-native-currency-input';
+import { useRhinoState, useRhinoValue } from "react-rhino"
 
 export default function Landing() {
-    const [income, setIncome] = useState(0.00);
+    const hi = useRhinoValue("dark_mode")
     const [amount, setAmount] = useState(0.00);
     const [category, setCategory] = useState('')
     return(
         <View>
-            <Text style={styles.centered}> After Tax Income </Text>
-            <CurrencyInput
-                value={income}
-                style={styles.inputBasic}
-                onChangeValue={setIncome}
-                prefix={'$ '}
-                signPosition="beforePrefix"
-                delimiter=","
-                precision={2}
-                separator="."
-                minValue={0}
-            />
             <Text style={styles.centered}> Amount </Text>
             <CurrencyInput
                 value={amount}
@@ -49,9 +38,7 @@ export default function Landing() {
             title="Submit"
             onPress={() => {Alert.alert('Latest Transaction Submitted!'), setCategory(''), setAmount(0.00)}}
             />
-            <Text>
-                Income: {income} Amount: {amount} Category Selected: {category}
-            </Text>
+            <Text>{hi}</Text>
         </View>
     );
 }

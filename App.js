@@ -10,10 +10,21 @@ import Landing from './src/screens/LandingPage/Landing';
 import Form from './src/screens/FillOutForm/Form';
 import Settings from './src/screens/Settings/Settings'
 
+import { RhinoProvider } from 'react-rhino';
+
+const store = {
+    income: 0.00,
+    wants: 0.00,
+    needs: 0.00,
+    savings: 0.00,
+    dark_mode: "yo"
+   }
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
+    <RhinoProvider store={store}>
     <NavigationContainer screenOptions={styles.headers}>
       <Tab.Navigator screenOptions={{headerTitleAlign: 'center'}}>
         <Tab.Screen name="Budget Breakdown" component={Landing} options={styles.homeIcon}/>
@@ -21,6 +32,7 @@ export default function App() {
         <Tab.Screen name="Settings" component={Settings} options={styles.settingIcon}/>
       </Tab.Navigator>
     </NavigationContainer>
+    </RhinoProvider>
   );
   
 }
