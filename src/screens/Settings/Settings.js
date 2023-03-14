@@ -5,8 +5,10 @@ import CurrencyInput from 'react-native-currency-input';
 import { useRhinoState } from "react-rhino"
 
 export default function Settings() {
-    //const [income, setIncome] = useState(0.00);
     const [income, setIncome] = useRhinoState("income");
+    const [wantsSpent, setWantsSpent] = useRhinoState("wants");
+    const [needsSpent, setNeedsSpent] = useRhinoState("needs");
+    const [savingsSpent, setSavingsSpent] = useRhinoState("savings");
     return(
         <View style={styles.centered}>
             <Text style={styles.centered}> After Tax Income </Text>
@@ -20,10 +22,13 @@ export default function Settings() {
                 precision={2}
                 separator="."
                 minValue={0}
+                color='white'
             />
             <Button
             title="Erase Data"
-            onPress={() => Alert.alert('Data has been erased!')}
+            color="#F43E3F"
+            onPress={() => {Alert.alert('Data has been erased!'), setNeedsSpent(0.00), setWantsSpent(0.00), setSavingsSpent(0.00), setIncome(0.00)}
+            }
             />
         </View>
     );
@@ -34,6 +39,16 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
+      },
+      inputBasic: {
+        textAlign: 'center',
+        marginVertical: 8,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: '#cdcdcd',
+        paddingHorizontal: 12,
+        height: 54,
       },
 });

@@ -2,7 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
+} from '@react-navigation/native';
+import { useColorScheme } from 'react-native';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -17,15 +23,15 @@ const store = {
     wants: 0.00,
     needs: 0.00,
     savings: 0.00,
-    dark_mode: "yo"
    }
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+
   return (
     <RhinoProvider store={store}>
-    <NavigationContainer screenOptions={styles.headers}>
+    <NavigationContainer screenOptions={styles.headers} theme={DarkTheme}>
       <Tab.Navigator screenOptions={{headerTitleAlign: 'center'}}>
         <Tab.Screen name="Budget Breakdown" component={Landing} options={styles.homeIcon}/>
         <Tab.Screen name="Form" component={Form} options={styles.formIcon}/>

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { StyleSheet, Button, Text, TextInput, View , Alert} from 'react-native';
+import { StyleSheet, Button, Text, TextInput, View , Alert, } from 'react-native';
 
 import CurrencyInput from 'react-native-currency-input';
 import { useRhinoState, useRhinoValue } from "react-rhino"
 
 export default function Landing() {
-    const hi = useRhinoValue("dark_mode")
     const [amount, setAmount] = useState(0.00);
     const [category, setCategory] = useState('')
+    const [wantsSpent, setWantsSpent] = useRhinoState("wants");
+    const [needsSpent, setNeedsSpent] = useRhinoState("needs");
+    const [savingsSpent, setSavingsSpent] = useRhinoState("savings");
     return(
         <View>
             <Text style={styles.centered}> Amount </Text>
@@ -21,29 +23,57 @@ export default function Landing() {
                 precision={2}
                 separator="."
                 minValue={0}
+                color='white'
             />
             <Button
             title="Wants"
             onPress={() => setCategory('wants')}
+            color="rgba(255, 153, 51, 1)"
             />
             <Button
             title="Needs"
             onPress={() => setCategory('needs')}
+            color="rgba(255, 51, 51, 1)"
             />
             <Button
             title="Savings"
             onPress={() => setCategory('savings')}
+            color="rgba(51, 153, 255, 1)"
             />
+            
             <Button
             title="Submit"
-            onPress={() => {Alert.alert('Latest Transaction Submitted!'), setCategory(''), setAmount(0.00)}}
+            color='#443737'
+            onPress={() => {
+                if (category == ''){
+                    Alert.alert('Please tap a category!')
+                }else if (amount == 0.00){
+                    Alert.alert('Please enter an amount!')
+                }else{
+                    if (category == 'wants'){
+                        setWantsSpent(amount + wantsSpent)
+                    }else if (category == 'needs'){
+                        setNeedsSpent(amount + needsSpent)
+                    }else{
+                        setSavingsSpent(amount + savingsSpent)
+                    }
+                    Alert.alert('Latest Transaction Submitted!'), setCategory(''), setAmount(0.00)
+                }   
+                }
+            }
             />
-            <Text>{hi}</Text>
         </View>
     );
 }
 
+
+
 const styles = StyleSheet.create({
+    bottom: {
+        position: 'absolute',
+        bottom:0,
+        left:0,
+      },
     input: {
       height: 40,
       margin: 12,
@@ -62,5 +92,21 @@ const styles = StyleSheet.create({
         borderColor: '#cdcdcd',
         paddingHorizontal: 12,
         height: 54,
+      },
+      button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'white',
+      },
+      text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'black',
       },
   });
