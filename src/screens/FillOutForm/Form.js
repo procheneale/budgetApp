@@ -11,36 +11,42 @@ export default function Landing() {
     const [needsSpent, setNeedsSpent] = useRhinoState("needs");
     const [savingsSpent, setSavingsSpent] = useRhinoState("savings");
     return(
-        <View>
-            <Text style={styles.centered}> Amount </Text>
-            <CurrencyInput
-                value={amount}
-                style={styles.inputBasic}
-                onChangeValue={setAmount}
-                prefix={'$ '}
-                signPosition="beforePrefix"
-                delimiter=","
-                precision={2}
-                separator="."
-                minValue={0}
-                color='white'
-            />
-            <Button
-            title="Wants"
-            onPress={() => setCategory('wants')}
-            color="rgba(255, 153, 51, 1)"
-            />
-            <Button
-            title="Needs"
-            onPress={() => setCategory('needs')}
-            color="rgba(255, 51, 51, 1)"
-            />
-            <Button
-            title="Savings"
-            onPress={() => setCategory('savings')}
-            color="rgba(51, 153, 255, 1)"
-            />
-            
+        <View style={styles.mainConatinerStyle}>
+            <View style={styles.amt}>
+                <Text style={styles.centered}> Amount </Text>
+            </View>
+            <View style={styles.in}>
+                <CurrencyInput
+                    value={amount}
+                    style={styles.inputBasic}
+                    onChangeValue={setAmount}
+                    prefix={'$ '}
+                    signPosition="beforePrefix"
+                    delimiter=","
+                    precision={2}
+                    separator="."
+                    minValue={0}
+                    color='white'
+                />
+            </View>
+            <View style={styles.floatingOptions}>
+                <Button
+                title="Wants"
+                onPress={() => setCategory('wants')}
+                color="rgba(255, 153, 51, 1)"
+                />
+                <Button
+                title="Needs"
+                onPress={() => setCategory('needs')}
+                color="rgba(255, 51, 51, 1)"
+                />
+                <Button
+                title="Savings"
+                onPress={() => setCategory('savings')}
+                color="rgba(51, 153, 255, 1)"
+                />
+            </View>
+            <View style={styles.floatingMenuButtonStyle}>
             <Button
             title="Submit"
             color='#443737'
@@ -62,6 +68,7 @@ export default function Landing() {
                 }
             }
             />
+            </View>
         </View>
     );
 }
@@ -69,20 +76,10 @@ export default function Landing() {
 
 
 const styles = StyleSheet.create({
-    bottom: {
-        position: 'absolute',
-        bottom:0,
-        left:0,
-      },
-    input: {
-      height: 40,
-      margin: 12,
-      borderWidth: 1,
-      padding: 10,
-    },
     centered: {
         textAlign: 'center',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'white'
     },
     inputBasic: {
         textAlign: 'center',
@@ -93,20 +90,28 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         height: 54,
       },
-      button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
-        backgroundColor: 'white',
+      mainConatinerStyle: {
+        flexDirection: 'column',
+        flex: 1
       },
-      text: {
-        fontSize: 16,
-        lineHeight: 21,
-        fontWeight: 'bold',
-        letterSpacing: 0.25,
-        color: 'black',
+      floatingMenuButtonStyle: {
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 50
+    },
+      floatingOptions:{
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 225
       },
+      in:{
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 400
+      },
+      amt:{
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 475
+      }
   });

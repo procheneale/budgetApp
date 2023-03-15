@@ -86,10 +86,12 @@ export default function Landing() {
         paddingLeft="15"
         absolute //for the absolute number remove if you want percentage
       />
+      <View>
         <Text style={styles.centered}>Income: ${wantsSpent+needsSpent+savingsSpent}/{income}</Text>
         <Text style={styles.centered}>Wants: ${wantsSpent}/{wants}</Text>
         <Text style={styles.centered}>Needs: ${needsSpent}/{needs}</Text>
         <Text style={styles.centered}>Savings: ${savingsSpent}/{savings}</Text>
+      </View>
       </View>
     );
 }
@@ -100,4 +102,5 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white'
       },
+    
 });
